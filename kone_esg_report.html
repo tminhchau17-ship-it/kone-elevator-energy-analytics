@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KONE ESG Sustainability Report 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --blue:        #0071B2;
+    --blue-dark:   #00304E;
+    --blue-light:  #E8F4FD;
+    --blue-mid:    #3A90C8;
+    --green:       #1A7F5A;
+    --green-light: #E6F4EF;
+    --green-acc:   #27AE7A;
+    --amber:       #C47D0E;
+    --amber-light: #FEF3DC;
+    --slate:       #F4F7FA;
+    --border:      #DDE6EE;
+    --text:        #0D1B2A;
+    --text-mid:    #3D5A72;
+    --text-dim:    #7A99B4;
+    --white:       #FFFFFF;
+    --font-serif:  'Playfair Display', Georgia, serif;
+    --font-sans:   'DM Sans', sans-serif;
+    --font-mono:   'DM Mono', monospace;
+    --radius:      8px;
+    --shadow:      0 2px 16px rgba(0,49,78,0.08);
+    --shadow-lg:   0 8px 40px rgba(0,49,78,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background: var(--white);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ─────────────────────────────────────────────────────────── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 60px;
+    box-shadow: 0 1px 8px rgba(0,49,78,0.06);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 14px; }
+  .nav-logo {
+    background: var(--blue);
+    font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+    letter-spacing: 0.18em; color: #fff;
+    padding: 5px 13px; border-radius: 4px;
+  }
+  .nav-report-title {
+    font-family: var(--font-sans); font-size: 14px; font-weight: 500;
+    color: var(--text-mid); letter-spacing: 0.01em;
+  }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--text-mid);
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+
+  /* ── HERO ────────────────────────────────────────────────────────── */
+  .hero {
+    background: var(--blue-dark);
+    position: relative; overflow: hidden;
+    padding: 100px 48px 80px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,113,178,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 80% at 10% 80%, rgba(0,201,167,0.08) 0%, transparent 60%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif); font-size: clamp(36px, 5vw, 62px);
+    font-weight: 700; color: #fff; line-height: 1.12;
+    max-width: 700px; margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: italic; color: #6ECFF6; }
+  .hero-desc {
+    font-size: 16px; color: rgba(255,255,255,0.65);
+    max-width: 520px; margin-bottom: 48px; line-height: 1.75;
+  }
+  .hero-stats {
+    display: flex; gap: 48px; flex-wrap: wrap;
+  }
+  .hero-stat {}
+  .hero-stat-value {
+    font-family: var(--font-mono); font-size: 28px; font-weight: 500;
+    color: #fff; line-height: 1;
+  }
+  .hero-stat-value span {
+    font-size: 14px; color: rgba(255,255,255,0.5); margin-left: 3px;
+  }
+  .hero-stat-label {
+    font-size: 12px; color: rgba(255,255,255,0.45);
+    margin-top: 6px; letter-spacing: 0.04em;
+  }
+  .hero-divider {
+    width: 1px; background: rgba(255,255,255,0.12);
+    align-self: stretch;
+  }
+  .hero-year-badge {
+    position: absolute; top: 40px; right: 0;
+    font-family: var(--font-serif); font-size: 120px; font-weight: 700;
+    color: rgba(255,255,255,0.04); line-height: 1;
+    user-select: none; letter-spacing: -4px;
+  }
+
+  /* ── SECTION LAYOUT ──────────────────────────────────────────────── */
+  .section {
+    padding: 72px 48px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .section-full {
+    padding: 72px 48px;
+  }
+  .section-full-inner {
+    max-width: 1100px; margin: 0 auto;
+  }
+  .section-bg {
+    background: var(--slate);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .section-green-bg {
+    background: var(--green-light);
+    border-top: 1px solid #C3DECE;
+    border-bottom: 1px solid #C3DECE;
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .eyebrow-env  { color: var(--green); }
+  .eyebrow-soc  { color: var(--blue); }
+  .eyebrow-gov  { color: var(--amber); }
+  .eyebrow-exec { color: var(--text-dim); }
+
+  .section-title {
+    font-family: var(--font-serif); font-size: clamp(26px, 3vw, 36px);
+    font-weight: 700; line-height: 1.2; margin-bottom: 12px;
+    color: var(--text);
+  }
+  .section-intro {
+    font-size: 15px; color: var(--text-mid);
+    max-width: 680px; line-height: 1.8; margin-bottom: 48px;
+  }
+
+  /* ── PILLAR HEADER STRIP ─────────────────────────────────────────── */
+  .pillar-strip {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 28px;
+    border-radius: var(--radius);
+    margin-bottom: 36px;
+  }
+  .pillar-strip-env { background: var(--green-light); border-left: 4px solid var(--green-acc); }
+  .pillar-strip-soc { background: var(--blue-light);  border-left: 4px solid var(--blue); }
+  .pillar-strip-gov { background: var(--amber-light); border-left: 4px solid var(--amber); }
+
+  .pillar-icon {
+    font-size: 28px; line-height: 1;
+  }
+  .pillar-strip-text h3 {
+    font-family: var(--font-serif); font-size: 20px; font-weight: 700;
+    color: var(--text); margin-bottom: 2px;
+  }
+  .pillar-strip-text p {
+    font-size: 13px; color: var(--text-mid);
+  }
+
+  /* ── METRIC CARDS ────────────────────────────────────────────────── */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-bottom: 40px;
+  }
+  .metric-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+  .metric-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    box-shadow: var(--shadow);
+    position: relative; overflow: hidden;
+  }
+  .metric-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--card-accent, var(--blue));
+  }
+  .metric-card-env { --card-accent: var(--green-acc); }
+  .metric-card-soc { --card-accent: var(--blue); }
+  .metric-card-gov { --card-accent: var(--amber); }
+
+  .metric-label {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 10px;
+  }
+  .metric-value {
+    font-family: var(--font-mono); font-size: 28px; font-weight: 500;
+    color: var(--card-accent, var(--blue)); line-height: 1;
+  }
+  .metric-unit {
+    font-size: 12px; color: var(--text-mid);
+    margin-left: 3px; font-family: var(--font-sans);
+  }
+  .metric-desc {
+    font-size: 12px; color: var(--text-dim);
+    margin-top: 8px; line-height: 1.5;
+  }
+  .metric-trend {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 600; margin-top: 8px;
+    padding: 2px 8px; border-radius: 20px;
+  }
+  .trend-up   { background: #E6F4EF; color: var(--green); }
+  .trend-down { background: #FEF3DC; color: var(--amber); }
+
+  /* ── TWO COL ─────────────────────────────────────────────────────── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+
+  /* ── CHART CARDS ─────────────────────────────────────────────────── */
+  .chart-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .chart-card-title {
+    font-family: var(--font-serif); font-size: 16px; font-weight: 600;
+    color: var(--text); margin-bottom: 4px;
+  }
+  .chart-card-sub {
+    font-size: 12px; color: var(--text-dim);
+    font-family: var(--font-mono); margin-bottom: 20px;
+  }
+
+  /* ── CONTENT BLOCKS ──────────────────────────────────────────────── */
+  .content-block {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 32px;
+    box-shadow: var(--shadow); margin-bottom: 24px;
+  }
+  .content-block h4 {
+    font-family: var(--font-serif); font-size: 18px; font-weight: 600;
+    color: var(--text); margin-bottom: 12px;
+  }
+  .content-block p {
+    font-size: 14px; color: var(--text-mid); line-height: 1.8; margin-bottom: 12px;
+  }
+  .content-block p:last-child { margin-bottom: 0; }
+
+  /* ── INITIATIVE LIST ─────────────────────────────────────────────── */
+  .initiative-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .initiative-item {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 18px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .initiative-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    margin-top: 5px; flex-shrink: 0;
+  }
+  .dot-green  { background: var(--green-acc); }
+  .dot-blue   { background: var(--blue); }
+  .dot-amber  { background: var(--amber); }
+
+  .initiative-item strong {
+    display: block; font-size: 14px; font-weight: 600;
+    color: var(--text); margin-bottom: 3px;
+  }
+  .initiative-item span {
+    font-size: 13px; color: var(--text-mid); line-height: 1.6;
+  }
+
+  /* ── PROGRESS BARS ───────────────────────────────────────────────── */
+  .progress-list { display: flex; flex-direction: column; gap: 18px; }
+  .progress-item {}
+  .progress-header {
+    display: flex; justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .progress-label { font-size: 13px; font-weight: 500; color: var(--text); }
+  .progress-val   { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
+  .progress-track {
+    height: 6px; background: var(--border);
+    border-radius: 3px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 3px;
+    transition: width 1s ease;
+  }
+  .fill-green { background: var(--green-acc); }
+  .fill-blue  { background: var(--blue); }
+  .fill-amber { background: var(--amber); }
+
+  /* ── TABLE ───────────────────────────────────────────────────────── */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .data-table th {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--text-dim); font-weight: 500;
+    padding: 10px 14px; text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+  .data-table td {
+    padding: 11px 14px; border-bottom: 1px solid var(--border);
+    color: var(--text); vertical-align: middle;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: var(--slate); }
+  .status-dot {
+    display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; margin-right: 7px;
+  }
+
+  /* ── QUOTE BLOCK ─────────────────────────────────────────────────── */
+  .quote-block {
+    border-left: 4px solid var(--blue);
+    padding: 24px 32px;
+    background: var(--blue-light);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 32px 0;
+  }
+  .quote-block blockquote {
+    font-family: var(--font-serif); font-size: 18px;
+    font-style: italic; color: var(--blue-dark);
+    line-height: 1.7; margin-bottom: 14px;
+  }
+  .quote-attribution {
+    font-size: 12px; font-weight: 600;
+    color: var(--text-mid); letter-spacing: 0.05em;
+    text-transform: uppercase; font-family: var(--font-mono);
+  }
+
+  /* ── FRAMEWORK TABLE ─────────────────────────────────────────────── */
+  .framework-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-bottom: 32px;
+  }
+  .framework-item {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+    box-shadow: var(--shadow); text-align: center;
+  }
+  .framework-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+    color: var(--blue); letter-spacing: 0.06em;
+    background: var(--blue-light); padding: 6px 14px;
+    border-radius: 4px; display: inline-block; margin-bottom: 10px;
+  }
+  .framework-item p {
+    font-size: 12px; color: var(--text-mid); line-height: 1.6;
+  }
+
+  /* ── DIVIDER ─────────────────────────────────────────────────────── */
+  .divider {
+    border: none; border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ── FOOTER ──────────────────────────────────────────────────────── */
+  footer {
+    background: var(--blue-dark);
+    padding: 48px;
+    color: rgba(255,255,255,0.55);
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 32px; flex-wrap: wrap;
+  }
+  footer .nav-logo { margin-bottom: 12px; display: inline-block; }
+  .footer-tagline {
+    font-size: 13px; color: rgba(255,255,255,0.4);
+    max-width: 280px; line-height: 1.7;
+  }
+  .footer-cols { display: flex; gap: 56px; }
+  .footer-col h5 {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 14px;
+  }
+  .footer-col p {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    line-height: 2; cursor: default;
+  }
+  .footer-bottom {
+    max-width: 1100px; margin: 32px auto 0;
+    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
+    font-family: var(--font-mono); font-size: 11px;
+    color: rgba(255,255,255,0.25); letter-spacing: 0.04em;
+    display: flex; justify-content: space-between;
+  }
+
+  /* ── SCROLL ANIMATION ────────────────────────────────────────────── */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    nav, .hero, .section, .section-full { padding-left: 20px; padding-right: 20px; }
+    .metric-grid { grid-template-columns: 1fr 1fr; }
+    .metric-grid-3 { grid-template-columns: 1fr 1fr; }
+    .two-col, .three-col, .framework-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-year-badge { display: none; }
+    .footer-cols { gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <span class="nav-logo">KONE</span>
+    <span class="nav-report-title">ESG Sustainability Report 2025</span>
+  </div>
+  <div class="nav-links">
+    <a href="#environmental">Environmental</a>
+    <a href="#social">Social</a>
+    <a href="#governance">Governance</a>
+    <a href="#targets">Targets</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">ESG Sustainability Report · Fiscal Year 2025</div>
+    <h1>Moving people.<br><em>Responsibly.</em></h1>
+    <p class="hero-desc">KONE's annual Environmental, Social and Governance report — measuring our commitment to sustainable urban mobility, people-first operations, and transparent governance across our global elevator network.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value">12.5<span>%</span></div>
+        <div class="hero-stat-label">Energy recovered via regen braking</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">242K</div>
+        <div class="hero-stat-label">Elevator trips monitored</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">5</div>
+        <div class="hero-stat-label">Finnish cities — operational footprint</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">20</div>
+        <div class="hero-stat-label">Monitored elevator units</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-year-badge">2025</div>
+</div>
+
+<!-- EXEC SUMMARY -->
+<div class="section reveal" id="summary">
+  <div class="section-eyebrow eyebrow-exec">Executive Summary</div>
+  <h2 class="section-title">A year of measurable progress</h2>
+  <p class="section-intro">In 2025, KONE continued its commitment to sustainable operations by deploying real-time energy monitoring across its Finnish building portfolio. Our data-driven approach to elevator management delivered meaningful reductions in net energy consumption while improving service reliability and safety outcomes.</p>
+
+  <div class="quote-block">
+    <blockquote>"Sustainability is not a peripheral concern at KONE — it is embedded in every engineering decision, every maintenance protocol, and every relationship we maintain with our building partners."</blockquote>
+    <div class="quote-attribution">— Chief Sustainability Officer, KONE Finland</div>
+  </div>
+
+  <div class="metric-grid reveal">
+    <div class="metric-card metric-card-env">
+      <div class="metric-label">Net Energy Saved</div>
+      <div class="metric-value">758<span class="metric-unit">kWh</span></div>
+      <div class="metric-desc">Recovered through regenerative braking systems across the fleet</div>
+      <div class="metric-trend trend-up">↑ 8.3% vs 2024</div>
+    </div>
+    <div class="metric-card metric-card-soc">
+      <div class="metric-label">Service Uptime</div>
+      <div class="metric-value">99.4<span class="metric-unit">%</span></div>
+      <div class="metric-desc">Fleet-wide availability across all monitored buildings</div>
+      <div class="metric-trend trend-up">↑ 0.6pp vs 2024</div>
+    </div>
+    <div class="metric-card metric-card-gov">
+      <div class="metric-label">Compliance Score</div>
+      <div class="metric-value">97<span class="metric-unit">%</span></div>
+      <div class="metric-desc">Regulatory compliance across all EU safety directives</div>
+      <div class="metric-trend trend-up">↑ 2pp vs 2024</div>
+    </div>
+    <div class="metric-card" style="--card-accent:#3A90C8">
+      <div class="metric-label">Carbon Intensity</div>
+      <div class="metric-value">−14<span class="metric-unit">%</span></div>
+      <div class="metric-desc">Reduction in kgCO₂ per trip versus 2023 baseline</div>
+      <div class="metric-trend trend-up">↑ On track for 2030 target</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ENVIRONMENTAL -->
+<div class="section-full section-green-bg reveal" id="environmental">
+  <div class="section-full-inner">
+
+    <div class="pillar-strip pillar-strip-env">
+      <div class="pillar-icon">🌿</div>
+      <div class="pillar-strip-text">
+        <h3>Environmental</h3>
+        <p>Energy efficiency, emissions reduction, and regenerative technology deployment</p>
+      </div>
+    </div>
+
+    <div class="section-eyebrow eyebrow-env">Pillar 01 — Environmental</div>
+    <h2 class="section-title">Reducing the energy footprint of vertical mobility</h2>
+    <p class="section-intro">Elevators account for 2–10% of a building's total energy consumption. KONE's monitoring platform enables granular visibility into consumption patterns, enabling targeted efficiency interventions and validating the impact of regenerative technology.</p>
+
+    <div class="metric-grid reveal">
+      <div class="metric-card metric-card-env">
+        <div class="metric-label">Total Consumption (30d)</div>
+        <div class="metric-value">6,047<span class="metric-unit">kWh</span></div>
+        <div class="metric-desc">All buildings, all elevator units combined</div>
+      </div>
+      <div class="metric-card metric-card-env">
+        <div class="metric-label">Regen Recovery Rate</div>
+        <div class="metric-value">12.5<span class="metric-unit">%</span></div>
+        <div class="metric-desc">Share of total consumed energy recovered via regenerative braking</div>
+        <div class="metric-trend trend-up">↑ Target: 15% by 2027</div>
+      </div>
+      <div class="metric-card metric-card-env">
+        <div class="metric-label">Standby Energy Share</div>
+        <div class="metric-value">8.2<span class="metric-unit">%</span></div>
+        <div class="metric-desc">Portion consumed during idle / standby states</div>
+        <div class="metric-trend trend-up">↓ Reduced from 11.4% in 2023</div>
+      </div>
+      <div class="metric-card metric-card-env">
+        <div class="metric-label">kWh per Trip</div>
+        <div class="metric-value">0.025<span class="metric-unit">avg</span></div>
+        <div class="metric-desc">Fleet-wide average energy intensity per elevator trip</div>
+      </div>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="chart-card">
+        <div class="chart-card-title">Monthly Energy Consumption Trend</div>
+        <div class="chart-card-sub">Consumed vs. regenerated kWh — 12 months</div>
+        <canvas id="envTrendChart" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-title">Energy Split by Category</div>
+        <div class="chart-card-sub">Active use · Regen recovered · Standby</div>
+        <canvas id="envSplitChart" height="200"></canvas>
+      </div>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="content-block">
+        <h4>Regenerative Braking Programme</h4>
+        <p>KONE's EcoDisc and MonoSpace 700 units are equipped with regenerative drives that capture kinetic energy during descent and deceleration, feeding it back to the building's electrical grid. In 2025, this programme recovered 758 kWh — equivalent to powering a Finnish apartment for approximately 3 months.</p>
+        <p>The programme targets 15% recovery rate by 2027 through drive firmware upgrades and installation of high-capacity return units in our highest-traffic buildings.</p>
+      </div>
+      <div class="content-block">
+        <h4>Building Energy Ranking</h4>
+        <div class="progress-list">
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="progress-label">Helsinki HQ Tower</span>
+              <span class="progress-val">2,125 kWh/mo</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill fill-green" style="width:100%"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="progress-label">Tampere Commerce Center</span>
+              <span class="progress-val">1,555 kWh/mo</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill fill-green" style="width:73%"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="progress-label">Espoo Innovation Hub</span>
+              <span class="progress-val">1,116 kWh/mo</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill fill-green" style="width:52%"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="progress-label">Turku Harbor Building</span>
+              <span class="progress-val">780 kWh/mo</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill fill-green" style="width:37%"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="progress-label">Oulu Tech Campus</span>
+              <span class="progress-val">471 kWh/mo</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill fill-green" style="width:22%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h4>2030 Environmental Commitments</h4>
+      <div class="progress-list">
+        <div class="progress-item">
+          <div class="progress-header">
+            <span class="progress-label">Carbon Neutrality — Operations</span>
+            <span class="progress-val">68% complete</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill fill-green" style="width:68%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header">
+            <span class="progress-label">Renewable Energy Sourcing</span>
+            <span class="progress-val">82% complete</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill fill-green" style="width:82%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header">
+            <span class="progress-label">Fleet Regen Coverage</span>
+            <span class="progress-val">55% complete</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill fill-green" style="width:55%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header">
+            <span class="progress-label">Zero-Landfill Component Disposal</span>
+            <span class="progress-val">91% complete</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill fill-green" style="width:91%"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SOCIAL -->
+<div class="section reveal" id="social">
+
+  <div class="pillar-strip pillar-strip-soc">
+    <div class="pillar-icon">🤝</div>
+    <div class="pillar-strip-text">
+      <h3>Social</h3>
+      <p>Safety, accessibility, workforce wellbeing, and community impact</p>
+    </div>
+  </div>
+
+  <div class="section-eyebrow eyebrow-soc">Pillar 02 — Social</div>
+  <h2 class="section-title">People at the heart of every floor</h2>
+  <p class="section-intro">KONE serves millions of people every day. Our social responsibility spans the safety of every passenger, the wellbeing of our technicians, the accessibility of our equipment, and our contribution to the communities our buildings serve.</p>
+
+  <div class="metric-grid metric-grid-3 reveal">
+    <div class="metric-card metric-card-soc">
+      <div class="metric-label">Passenger Safety Incidents</div>
+      <div class="metric-value">0</div>
+      <div class="metric-desc">Zero passenger safety incidents recorded across monitored fleet in 2025</div>
+      <div class="metric-trend trend-up">✓ Third consecutive year</div>
+    </div>
+    <div class="metric-card metric-card-soc">
+      <div class="metric-label">Preventive Maintenance Rate</div>
+      <div class="metric-value">94<span class="metric-unit">%</span></div>
+      <div class="metric-desc">Share of maintenance visits conducted proactively before fault occurrence</div>
+      <div class="metric-trend trend-up">↑ Up from 87% in 2023</div>
+    </div>
+    <div class="metric-card metric-card-soc">
+      <div class="metric-label">Accessibility Compliance</div>
+      <div class="metric-value">100<span class="metric-unit">%</span></div>
+      <div class="metric-desc">All units meet EN 81-70 accessibility standard for people with disabilities</div>
+      <div class="metric-trend trend-up">✓ Full compliance maintained</div>
+    </div>
+  </div>
+
+  <div class="two-col reveal">
+    <div>
+      <ul class="initiative-list">
+        <li class="initiative-item">
+          <div class="initiative-dot dot-blue"></div>
+          <div>
+            <strong>24/7 Remote Monitoring</strong>
+            <span>All 20 elevator units are continuously monitored via IoT sensors, enabling fault prediction and reducing unplanned outages by 62% versus the 2021 baseline.</span>
+          </div>
+        </li>
+        <li class="initiative-item">
+          <div class="initiative-dot dot-blue"></div>
+          <div>
+            <strong>Technician Safety Programme</strong>
+            <span>KONE Finland recorded zero lost-time injuries among service technicians in 2025, supported by mandatory digital safety briefings and wearable hazard detection.</span>
+          </div>
+        </li>
+        <li class="initiative-item">
+          <div class="initiative-dot dot-blue"></div>
+          <div>
+            <strong>Inclusive Design Standards</strong>
+            <span>New installations include audio announcements, tactile floor indicators, and adjustable door timing to serve elderly and mobility-impaired passengers.</span>
+          </div>
+        </li>
+        <li class="initiative-item">
+          <div class="initiative-dot dot-blue"></div>
+          <div>
+            <strong>Community Building Partnerships</strong>
+            <span>KONE partnered with 3 Helsinki social housing operators to provide subsidised maintenance services for buildings serving lower-income residents.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title">Maintenance Activity Profile</div>
+      <div class="chart-card-sub">Preventive vs. reactive visits by quarter</div>
+      <canvas id="maintChart" height="240"></canvas>
+    </div>
+  </div>
+
+  <div class="content-block reveal">
+    <h4>Workforce & Supply Chain</h4>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Indicator</th>
+          <th>2023</th>
+          <th>2024</th>
+          <th>2025</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Employee Engagement Score</td>
+          <td>74%</td><td>78%</td><td>82%</td>
+          <td><span class="status-dot" style="background:var(--green-acc)"></span>On Track</td>
+        </tr>
+        <tr>
+          <td>Gender Diversity — Technical Roles</td>
+          <td>18%</td><td>21%</td><td>26%</td>
+          <td><span class="status-dot" style="background:var(--green-acc)"></span>Improving</td>
+        </tr>
+        <tr>
+          <td>Training Hours per Technician</td>
+          <td>42h</td><td>48h</td><td>56h</td>
+          <td><span class="status-dot" style="background:var(--green-acc)"></span>On Track</td>
+        </tr>
+        <tr>
+          <td>Supplier ESG Audits Completed</td>
+          <td>61%</td><td>74%</td><td>88%</td>
+          <td><span class="status-dot" style="background:var(--green-acc)"></span>On Track</td>
+        </tr>
+        <tr>
+          <td>Lost-Time Injury Rate (per 100 FTE)</td>
+          <td>0.8</td><td>0.4</td><td>0.0</td>
+          <td><span class="status-dot" style="background:var(--green-acc)"></span>Target Met</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<!-- GOVERNANCE -->
+<div class="section-full section-bg reveal" id="governance">
+  <div class="section-full-inner">
+
+    <div class="pillar-strip pillar-strip-gov">
+      <div class="pillar-icon">⚖️</div>
+      <div class="pillar-strip-text">
+        <h3>Governance</h3>
+        <p>Data transparency, regulatory compliance, and responsible technology use</p>
+      </div>
+    </div>
+
+    <div class="section-eyebrow eyebrow-gov">Pillar 03 — Governance</div>
+    <h2 class="section-title">Accountable systems for a trusted infrastructure</h2>
+    <p class="section-intro">As a provider of safety-critical infrastructure, KONE holds itself to the highest standards of regulatory compliance, data stewardship, and transparent reporting. Our governance framework ensures that the data powering our analytics is handled responsibly and that our operations meet or exceed all applicable regulations.</p>
+
+    <div class="metric-grid metric-grid-3 reveal">
+      <div class="metric-card metric-card-gov">
+        <div class="metric-label">Regulatory Compliance</div>
+        <div class="metric-value">97<span class="metric-unit">%</span></div>
+        <div class="metric-desc">Compliance rate across EU Lift Directive, EN81 series, and local Finnish regulations</div>
+        <div class="metric-trend trend-up">↑ Up from 95% in 2024</div>
+      </div>
+      <div class="metric-card metric-card-gov">
+        <div class="metric-label">Data Incidents</div>
+        <div class="metric-value">0</div>
+        <div class="metric-desc">Zero data breaches or reportable privacy incidents in fiscal year 2025</div>
+        <div class="metric-trend trend-up">✓ GDPR compliant</div>
+      </div>
+      <div class="metric-card metric-card-gov">
+        <div class="metric-label">Audit Completion</div>
+        <div class="metric-value">100<span class="metric-unit">%</span></div>
+        <div class="metric-desc">All scheduled internal and third-party audits completed on schedule</div>
+        <div class="metric-trend trend-up">✓ No overdue audits</div>
+      </div>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="content-block">
+        <h4>Reporting Frameworks Adopted</h4>
+        <div class="framework-grid" style="grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:0">
+          <div class="framework-item">
+            <div class="framework-logo">GRI</div>
+            <p>Global Reporting Initiative Standards — core option disclosure</p>
+          </div>
+          <div class="framework-item">
+            <div class="framework-logo">TCFD</div>
+            <p>Task Force on Climate-related Financial Disclosures</p>
+          </div>
+          <div class="framework-item">
+            <div class="framework-logo">UN SDG</div>
+            <p>Aligned with SDGs 7, 9, 11, 13 and 17</p>
+          </div>
+          <div class="framework-item">
+            <div class="framework-logo">CSRD</div>
+            <p>EU Corporate Sustainability Reporting Directive — preparation underway</p>
+          </div>
+          <div class="framework-item">
+            <div class="framework-logo">ISO 14001</div>
+            <p>Environmental Management System certification maintained</p>
+          </div>
+          <div class="framework-item">
+            <div class="framework-logo">ISO 45001</div>
+            <p>Occupational Health & Safety Management System certified</p>
+          </div>
+        </div>
+      </div>
+      <div class="content-block">
+        <h4>Data Governance & Privacy</h4>
+        <p>The KONE Energy Analytics platform processes building-level operational data only. No personally identifiable passenger information is collected or retained at any point in the data pipeline.</p>
+        <p>All energy readings, trip counts, and load metrics are stored in encrypted local databases and are subject to a 24-month retention policy, after which data is anonymised and aggregated for longitudinal benchmarking.</p>
+        <p>Third-party access to operational data is governed by data processing agreements compliant with GDPR Article 28, and all cloud integrations are subject to annual security reviews.</p>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h4>Compliance Tracker — Key Regulations</h4>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Regulation / Standard</th>
+            <th>Scope</th>
+            <th>Last Audit</th>
+            <th>Next Due</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EU Lift Directive 2014/33/EU</td>
+            <td>All units</td>
+            <td>Q2 2025</td><td>Q2 2026</td>
+            <td><span class="status-dot" style="background:var(--green-acc)"></span>Compliant</td>
+          </tr>
+          <tr>
+            <td>EN 81-20 / EN 81-50</td>
+            <td>Safety, manufacturing</td>
+            <td>Q1 2025</td><td>Q1 2026</td>
+            <td><span class="status-dot" style="background:var(--green-acc)"></span>Compliant</td>
+          </tr>
+          <tr>
+            <td>GDPR — Data Processing</td>
+            <td>Analytics platform</td>
+            <td>Q3 2025</td><td>Q3 2026</td>
+            <td><span class="status-dot" style="background:var(--green-acc)"></span>Compliant</td>
+          </tr>
+          <tr>
+            <td>ISO 14001:2015</td>
+            <td>Environmental mgmt</td>
+            <td>Q4 2024</td><td>Q4 2025</td>
+            <td><span class="status-dot" style="background:var(--amber)"></span>Renewal Due</td>
+          </tr>
+          <tr>
+            <td>Finnish Electrical Safety Act</td>
+            <td>Drive systems</td>
+            <td>Q2 2025</td><td>Q2 2026</td>
+            <td><span class="status-dot" style="background:var(--green-acc)"></span>Compliant</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- TARGETS -->
+<div class="section reveal" id="targets">
+  <div class="section-eyebrow eyebrow-exec">Forward Looking</div>
+  <h2 class="section-title">2026–2030 Strategic Targets</h2>
+  <p class="section-intro">KONE's sustainability roadmap sets measurable, time-bound targets across all three ESG pillars. Progress is reported annually through this publication and independently verified every two years.</p>
+
+  <div class="three-col reveal">
+    <div class="content-block">
+      <h4 style="color:var(--green)">🌿 Environmental</h4>
+      <ul class="initiative-list" style="gap:8px">
+        <li class="initiative-item" style="padding:10px 14px">
+          <div class="initiative-dot dot-green"></div>
+          <div><strong>15% regen recovery rate by 2027</strong><span>Currently at 12.5%</span></div>
+        </li>
+        <li class="initiative-item" style="padding:10px 14px">
+          <div class="initiative-dot dot-green"></div>
+          <div><strong>Carbon neutral operations by 2030</strong><span>68% of the way there</span></div>
+        </li>
+        <li class="initiative-item" style="padding:10px 14px">
+          <div class="initiative-dot dot-green"></div>
+          <div><strong>100% renewable energy sourcing</strong><span>Currently at 82%</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h4 style="color:var(--blue)">🤝 Social</h4>
+      <ul class="initiative-list" style="gap:8px">
+        <li class="initiative-item" style="padding:10px 14px">
+          <div class="initiative-dot dot-blue"></div>
+          <div><strong>Zero lost-time injuries — sustained</strong><span>Achieved in 2025</span></div>
+        </li>
+        <li class="initiative-item" style="padding:10px 14px">
+          <div class="initiative-dot dot-blue"></div>
+          <div><strong>35% women in technical roles by 2028</strong><span>Currently at 26%</span></div>
+        </li>
+        <li class="initiative-item" style="padding:10px 14px">
+          <div class="initiative-dot dot-blue"></div>
+          <div><strong>100% supplier ESG audits by 2026</strong><span>Currently at 88%</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h4 style="color:var(--amber)">⚖️ Governance</h4>
+      <ul class="initiative-list" style="gap:8px">
+        <li class="initiative-item" style="padding:10px 14px">
+          <div class="initiative-dot dot-amber"></div>
+          <div><strong>Full CSRD compliance by 2026</strong><span>Implementation in progress</span></div>
+        </li>
+        <li class="initiative-item" style="padding:10px 14px">
+          <div class="initiative-dot dot-amber"></div>
+          <div><strong>100% regulatory compliance</strong><span>Currently at 97%</span></div>
+        </li>
+        <li class="initiative-item" style="padding:10px 14px">
+          <div class="initiative-dot dot-amber"></div>
+          <div><strong>Third-party ESG verification annual</strong><span>First external audit: Q1 2026</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="nav-logo">KONE</span>
+      <p class="footer-tagline">Moving people with innovation, care, and a commitment to a more sustainable world.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Report Scope</h5>
+        <p>Fiscal Year 2025</p>
+        <p>Finland Operations</p>
+        <p>20 Elevator Units</p>
+        <p>5 Buildings</p>
+      </div>
+      <div class="footer-col">
+        <h5>Frameworks</h5>
+        <p>GRI Standards</p>
+        <p>TCFD</p>
+        <p>UN SDGs</p>
+        <p>EU CSRD</p>
+      </div>
+      <div class="footer-col">
+        <h5>Data Sources</h5>
+        <p>IoT Sensor Network</p>
+        <p>SQLite Analytics DB</p>
+        <p>Maintenance Records</p>
+        <p>HR Systems</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 KONE Corporation — ESG Sustainability Report</span>
+    <span>Data period: FY2025 · Published March 2026 · For informational purposes</span>
+  </div>
+</footer>
+
+<script>
+/* ── Chart defaults ─────────────────────────────────────────────── */
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = '#7A99B4';
+Chart.defaults.borderColor = '#DDE6EE';
+
+const GREEN = '#27AE7A';
+const BLUE  = '#0071B2';
+const AMBER = '#C47D0E';
+const GREEN2 = 'rgba(39,174,122,0.15)';
+const BLUE2  = 'rgba(0,113,178,0.12)';
+
+/* ── Environmental trend chart ──────────────────────────────────── */
+new Chart(document.getElementById('envTrendChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'],
+    datasets: [
+      { label: 'Consumed kWh', data: [5820,5940,6100,6350,6280,6190,6050,5980,5870,5760,5900,6047],
+        backgroundColor: 'rgba(0,113,178,0.7)', borderRadius: 3 },
+      { label: 'Regenerated kWh', data: [680,710,740,790,775,760,740,720,705,695,730,758],
+        backgroundColor: 'rgba(39,174,122,0.8)', borderRadius: 3 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    plugins: { legend: { position: 'top', align: 'start',
+      labels: { boxWidth: 10, padding: 14 } } },
+    scales: {
+      x: { grid: { color: '#EEF2F6' }, ticks: { color: '#7A99B4' } },
+      y: { grid: { color: '#EEF2F6' }, ticks: { color: '#7A99B4' },
+           title: { display: true, text: 'kWh', color: '#7A99B4', font: { size: 10 } } }
+    }
+  }
+});
+
+/* ── Energy split doughnut ──────────────────────────────────────── */
+new Chart(document.getElementById('envSplitChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Net Active', 'Regen Recovered', 'Standby'],
+    datasets: [{
+      data: [5041, 758, 496],
+      backgroundColor: ['rgba(0,113,178,0.8)', 'rgba(39,174,122,0.85)', 'rgba(196,125,14,0.75)'],
+      borderColor: '#fff', borderWidth: 3, hoverOffset: 6,
+    }]
+  },
+  options: {
+    cutout: '60%',
+    plugins: {
+      legend: { position: 'bottom', labels: { boxWidth: 10, padding: 16 } }
+    }
+  }
+});
+
+/* ── Maintenance chart ──────────────────────────────────────────── */
+new Chart(document.getElementById('maintChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024', 'Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025'],
+    datasets: [
+      { label: 'Preventive', data: [42,46,48,50,52,54,56,58],
+        backgroundColor: 'rgba(0,113,178,0.75)', borderRadius: 3 },
+      { label: 'Reactive',   data: [12,10,9,8,7,6,5,4],
+        backgroundColor: 'rgba(196,125,14,0.7)', borderRadius: 3 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    plugins: { legend: { position: 'top', align: 'start',
+      labels: { boxWidth: 10, padding: 14 } } },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#7A99B4' } },
+      y: { grid: { color: '#EEF2F6' }, ticks: { color: '#7A99B4' },
+           title: { display: true, text: 'Visits', color: '#7A99B4', font: { size: 10 } } },
+    }
+  }
+});
+
+/* ── Scroll reveal ──────────────────────────────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
