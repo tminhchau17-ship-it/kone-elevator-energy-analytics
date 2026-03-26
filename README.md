@@ -1,124 +1,35 @@
-# KONE Elevator Energy Analytics
+# Kone Elevator Energy Analytics
 
-A data analytics project that analyzes elevator operational data to monitor energy consumption, regenerative energy recovery, and traffic patterns.
+![Project Status](https://img.shields.io/badge/status-active-brightgreen.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## Project Overview
+## Overview
+Kone Elevator Energy Analytics is a comprehensive tool designed to help facility managers and building owners monitor and optimize the energy consumption of elevators. It provides insights into energy usage patterns and identifies opportunities for improvements.
 
-Modern elevators generate large amounts of operational data.
-This project analyzes that data to identify energy consumption trends, regenerative energy recovery, and usage patterns across buildings.
+## Features
+- **Real-Time Monitoring:** Track energy consumption in real time.
+- **Data Visualization:** Graphs and dashboards for easy analysis.
+- **Reporting:** Generate detailed reports on energy usage over time.
 
-The project includes:
-
-* Data analysis using Python and Pandas
-* Data visualization with Matplotlib
-* A Flask dashboard for monitoring elevator metrics
-* SQLite database for operational data storage
-
----
-
-## Key Metrics Analyzed
-
-* Total energy consumption (kWh)
-* Regenerative energy savings
-* Elevator traffic (number of trips)
-* Average cabin load utilization
-* Standby energy consumption
-
----
-
-## Dashboard Example
-
-![Daily Energy Consumption](screenshots/daily_energy.png)
-
----
-
-## Technologies Used
-
-Python
-Pandas
-Matplotlib
-SQLite
-Flask
-Jupyter Notebook
-
----
-
-## Project Structure
-
-```
-kone-elevator-energy-analytics
-│
-├── data/
-│   └── kone_energy.db
-│
-├── notebook/
-│   └── energy_analysis.ipynb
-│
-├── templates/
-│   └── index.html
-│
-├── screenshots/
-│   └── daily_energy.png
-│
-├── server.py
-├── seed_db.py
-├── db.py
-├── requirements.txt
-└── README.md
+## Installation
+To install the project, clone the repository and install the required dependencies:
+```bash
+git clone https://github.com/tminhchau17-ship-it/kone-elevator-energy-analytics.git
+cd kone-elevator-energy-analytics
+npm install
 ```
 
----
-
-## How to Run the Project
-
-Install dependencies
-
-```
-pip install -r requirements.txt
+## Usage
+Start the application with:
+```bash
+npm start
 ```
 
-Seed the database
+## Documentation
+For detailed documentation, please refer to the [Wiki](https://github.com/tminhchau17-ship-it/kone-elevator-energy-analytics/wiki). 
 
-```
-python seed_db.py
-```
+## Contributing
+Contributions are welcome! Please see the [Contribution Guidelines](https://github.com/tminhchau17-ship-it/kone-elevator-energy-analytics/blob/main/CONTRIBUTING.md) for more information.
 
-Run the server
-
-```
-python server.py
-```
-
-Then open:
-
-```
-http://localhost:5000
-```
-
----
-
-## Example Insights
-
-From the dataset analysis:
-
-* Elevator traffic peaks occur during morning and evening commuting hours.
-* Regenerative braking recovers approximately **12–15% of total energy**.
-* Standby energy contributes a consistent baseline consumption.
-
-These insights can help optimize elevator operations and improve building energy efficiency.
-
----
-
-## Future Improvements
-
-* Predictive energy consumption forecasting
-* Anomaly detection for elevator energy spikes
-* Real-time data ingestion
-* Interactive dashboard with Plotly
-
----
-
-## Author
-
-Minmin
-Data Analytics Portfolio Project
+## License
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/tminhchau17-ship-it/kone-elevator-energy-analytics/blob/main/LICENSE) file for details.
